@@ -1,7 +1,7 @@
 from Clases_Botones import *
 
 '''
-def cargar_registros(diccionario_registros): Función encargada de generar la opción de selección de los ficheros con la 
+def cargar_registros(diccionario_estudiantes): Función encargada de generar la opción de selección de los ficheros con la 
 información de los registros de acceso.
 
     - Argumentos:
@@ -12,7 +12,7 @@ información de los registros de acceso.
 '''
 
 
-def cargar_registros(diccionario_registros):
+def cargar_registros(diccionario_estudiantes):
     text = "LECTURA DE DATOS"
     titulo = widgets.HTML(value=f"<b>{text}</b>")
     display(titulo)
@@ -36,5 +36,5 @@ def cargar_registros(diccionario_registros):
 
     display(uploader)
 
-    boton = Boton_registros(uploader, diccionario_registros, carpeta)
+    boton = Boton_registros(uploader, diccionario_estudiantes)
     display(boton.button)

@@ -29,8 +29,8 @@ con las gráficas del número de registros de acceso a Moodle a un recurso indic
 '''
 
 
-def Grafica_registros_pdf(identificador, diccionario, s_fechas, fechas, estudiantes, color, documento, nombre_documento,
-                          carpeta, IP, diseno):
+def Grafica_registros_pdf(identificador, s_fechas, fechas, estudiantes, color, documento, nombre_documento,
+                          carpeta, IP, diseno, diccionario_estudiantes):
     etiqueta = 'Registros'
 
     w, h = A4
@@ -55,7 +55,7 @@ def Grafica_registros_pdf(identificador, diccionario, s_fechas, fechas, estudian
 
     if estudiantes[0] == "Todos":
         estudiantes = []
-        for e in diccionario.keys():
+        for e in diccionario_estudiantes.keys():
             estudiantes.append(e)
 
     if estudiantes[0] == "Grupo":
@@ -91,8 +91,8 @@ def Grafica_registros_pdf(identificador, diccionario, s_fechas, fechas, estudian
 
             contador = 0
 
-            for e in diccionario:
-                for r in diccionario[e]:
+            for e in diccionario_estudiantes:
+                for r in diccionario_estudiantes[e].registros:
                     if f[0] <= r.fecha <= f[1]:
                         if IP != '':
                             if identificador in r.descripcion and r.IP == IP:
@@ -135,7 +135,6 @@ def Grafica_registros_pdf(identificador, diccionario, s_fechas, fechas, estudian
 
         cursor += 250
         documento.drawImage(nombre_fichero, 50, h - int(cursor))
-        shutil.move(nombre_fichero, carpeta2)
 
         documento.showPage()
         documento.setFont("Times-Roman", 12)
@@ -169,7 +168,7 @@ def Grafica_registros_pdf(identificador, diccionario, s_fechas, fechas, estudian
 
                 x.append(str(f[0]).split(' ')[0] + " / " + str(f[1]).split(' ')[0])
 
-                for r in diccionario[e]:
+                for r in diccionario_estudiantes[e].registros:
                     if f[0] <= r.fecha <= f[1]:
                         if IP != '':
                             if identificador in r.descripcion and r.IP == IP:
@@ -218,6 +217,8 @@ def Grafica_registros_pdf(identificador, diccionario, s_fechas, fechas, estudian
 
             documento.showPage()
             documento.setFont("Times-Roman", 12)
+            cursor = 75
 
     documento.save()
-    shutil.move(nombre_documento, carpeta)
+    if carpeta != "":
+        shutil.move(nombre_documento, carpeta)

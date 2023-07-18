@@ -1,9 +1,7 @@
 import ipywidgets as widgets
 from IPython.display import display
-import os
-
+from termcolor import colored
 from ipyfilechooser import FileChooser
-
 from Descargar_graficas_registros import Grafica_registros_pdf
 from Graficas_registros import Grafica_registros
 from Lectura_Ficheros import *
@@ -172,20 +170,6 @@ class Boton_ficheros_s:
         self.documentos = documentos
 
     def on_button_clicked(self, b):
-        """p = widgets.Label(value="AVISO: Los ficheros se cargan desde la raíz de la carpeta.")
-        display(p)
-        p = widgets.Label(value="AVISO: Si los ficheros se encuentran en una subcarpeta, indique la ruta:")
-        display(p)
-        p = widgets.Label(value="Ejemplo:C:\\Users\\user\\Documents\\Archivos")
-        display(p)
-
-        carpeta = widgets.Text(
-            value='',
-            placeholder='Carpeta',
-            description='Carpeta:',
-            disabled=False
-        )
-        display(carpeta)"""
 
         tema = widgets.Text(
             value='',
@@ -474,17 +458,22 @@ class Boton_proceso_temafecha_pdf:
 
     def on_button_clicked(self, b):
 
-        documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
-        documento.setPageSize(A4)
+        if self.nombre_documento.value != "":
 
-        if self.opcion.value == "Temas x Fecha":
-            analisis_temario_fechas_pdf(self.diccionario_tema, self.seleccion_temas.value, self.seleccion_fechas.value,
-                                        self.fechas, documento, self.nombre_documento.value + ".pdf",
-                                        self.carpeta.value)
-        elif self.opcion.value == "Fecha x Temas":
-            analisis_fechas_temario_pdf(self.diccionario_tema, self.seleccion_temas.value, self.seleccion_fechas.value,
-                                        self.fechas, documento, self.nombre_documento.value + ".pdf",
-                                        self.carpeta.value)
+            documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
+            documento.setPageSize(A4)
+
+            if self.opcion.value == "Temas x Fecha":
+                analisis_temario_fechas_pdf(self.diccionario_tema, self.seleccion_temas.value, self.seleccion_fechas.value,
+                                            self.fechas, documento, self.nombre_documento.value + ".pdf",
+                                            self.carpeta.value)
+            elif self.opcion.value == "Fecha x Temas":
+                analisis_fechas_temario_pdf(self.diccionario_tema, self.seleccion_temas.value, self.seleccion_fechas.value,
+                                            self.fechas, documento, self.nombre_documento.value + ".pdf",
+                                            self.carpeta.value)
+        else:
+            texto = "Para poder descargar el documento PDF es necesario indicar el nombre."
+            print(colored(texto, 'red', attrs=['bold']))
 
 
 '''
@@ -561,11 +550,15 @@ class Boton_proceso_ranking_pdf:
         self.carpeta = carpeta
 
     def on_button_clicked(self, b):
-        documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
-        documento.setPageSize(A4)
+        if self.nombre_documento.value != "":
+            documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
+            documento.setPageSize(A4)
 
-        ranking_test_pdf(self.diccionario_tema, self.seleccion_fechas.value, self.fechas, self.opcion.value, documento,
-                         self.nombre_documento.value + ".pdf", self.carpeta.value)
+            ranking_test_pdf(self.diccionario_tema, self.seleccion_fechas.value, self.fechas, self.opcion.value, documento,
+                             self.nombre_documento.value + ".pdf", self.carpeta.value)
+        else:
+            texto = "Para poder descargar el documento PDF es necesario indicar el nombre."
+            print(colored(texto, 'red', attrs=['bold']))
 
 
 '''
@@ -673,20 +666,23 @@ class Boton_graficas_pdf:
         self.diseno = diseno
 
     def on_button_clicked(self, b):
+        if self.nombre_documento.value != "":
+            documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
+            documento.setPageSize(A4)
 
-        documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
-        documento.setPageSize(A4)
-
-        if self.opcion.value == "Fecha x Temas":
-            Grafica_fecha_test_pdf(self.diccionario_tema, self.seleccion_temas.value, self.seleccion_fechas.value,
-                                   self.fechas, self.opcion2.value, self.color.value, documento,
-                                   self.nombre_documento.value + ".pdf", self.carpeta.value,
-                                   self.diseno.value)
-        elif self.opcion.value == "Temas x Fecha":
-            Grafica_test_fecha_pdf(self.diccionario_tema, self.seleccion_temas.value, self.seleccion_fechas.value,
-                                   self.fechas, self.opcion2.value, self.color.value, documento,
-                                   self.nombre_documento.value + ".pdf", self.carpeta.value,
-                                   self.diseno.value)
+            if self.opcion.value == "Fecha x Temas":
+                Grafica_fecha_test_pdf(self.diccionario_tema, self.seleccion_temas.value, self.seleccion_fechas.value,
+                                       self.fechas, self.opcion2.value, self.color.value, documento,
+                                       self.nombre_documento.value + ".pdf", self.carpeta.value,
+                                       self.diseno.value)
+            elif self.opcion.value == "Temas x Fecha":
+                Grafica_test_fecha_pdf(self.diccionario_tema, self.seleccion_temas.value, self.seleccion_fechas.value,
+                                       self.fechas, self.opcion2.value, self.color.value, documento,
+                                       self.nombre_documento.value + ".pdf", self.carpeta.value,
+                                       self.diseno.value)
+        else:
+            texto = "Para poder descargar el documento PDF es necesario indicar el nombre."
+            print(colored(texto, 'red', attrs=['bold']))
 
 
 '''
@@ -767,12 +763,16 @@ class Boton_estudiantes_pdf:
         self.carpeta = carpeta
 
     def on_button_clicked(self, b):
-        documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
-        documento.setPageSize(A4)
+        if self.nombre_documento.value != "":
+            documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
+            documento.setPageSize(A4)
 
-        Resultados_estudiante_pdf(self.estudiantes.value, self.diccionario_estudiantes, self.seleccion_temas.value,
-                                  self.seleccion_fechas.value, self.fechas, self.opcion.value, documento,
-                                  self.nombre_documento.value + ".pdf", self.carpeta.value)
+            Resultados_estudiante_pdf(self.estudiantes.value, self.diccionario_estudiantes, self.seleccion_temas.value,
+                                      self.seleccion_fechas.value, self.fechas, self.opcion.value, documento,
+                                      self.nombre_documento.value + ".pdf", self.carpeta.value)
+        else:
+            texto = "Para poder descargar el documento PDF es necesario indicar el nombre."
+            print(colored(texto, 'red', attrs=['bold']))
 
 
 '''
@@ -858,12 +858,16 @@ class Boton_ranking_estudiante_pdf:
         self.carpeta = carpeta
 
     def on_button_clicked(self, b):
-        documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
-        documento.setPageSize(A4)
+        if self.nombre_documento.value != "":
+            documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
+            documento.setPageSize(A4)
 
-        ranking_test_estudiante_pdf(self.estudiante.value, self.diccionario_estudiantes, self.seleccion_fechas.value,
-                                    self.fechas, self.opcion.value, documento, self.nombre_documento.value + ".pdf",
-                                    self.carpeta.value)
+            ranking_test_estudiante_pdf(self.estudiante.value, self.diccionario_estudiantes, self.seleccion_fechas.value,
+                                        self.fechas, self.opcion.value, documento, self.nombre_documento.value + ".pdf",
+                                        self.carpeta.value)
+        else:
+            texto = "Para poder descargar el documento PDF es necesario indicar el nombre."
+            print(colored(texto, 'red', attrs=['bold']))
 
 
 '''
@@ -957,12 +961,16 @@ class Boton_ranking_estudiantes_pdf:
         self.carpeta = carpeta
 
     def on_button_clicked(self, b):
-        documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
-        documento.setPageSize(A4)
+        if self.nombre_documento.value != "":
+            documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
+            documento.setPageSize(A4)
 
-        ranking_estudiantes_pdf(self.diccionario_estudiantes, self.seleccion_temas.value, self.temas,
-                                self.seleccion_fechas.value, self.fechas, self.opcion.value, documento,
-                                self.nombre_documento.value + ".pdf", self.carpeta.value)
+            ranking_estudiantes_pdf(self.diccionario_estudiantes, self.seleccion_temas.value, self.temas,
+                                    self.seleccion_fechas.value, self.fechas, self.opcion.value, documento,
+                                    self.nombre_documento.value + ".pdf", self.carpeta.value)
+        else:
+            texto = "Para poder descargar el documento PDF es necesario indicar el nombre."
+            print(colored(texto, 'red', attrs=['bold']))
 
 
 '''
@@ -1084,13 +1092,17 @@ class Boton_grafica_estudiante_pdf:
         self.diseno = diseno
 
     def on_button_clicked(self, b):
-        documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
-        documento.setPageSize(A4)
+        if self.nombre_documento.value != "":
+            documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
+            documento.setPageSize(A4)
 
-        Grafica_estudiante_pdf(self.estudiante.value, self.diccionario_estudiantes, self.seleccion_temas.value,
-                               self.seleccion_fechas.value, self.fechas, self.opcion.value, self.opcion2.value,
-                               self.color.value, documento, self.nombre_documento.value + ".pdf", self.carpeta.value,
-                               self.diseno.value)
+            Grafica_estudiante_pdf(self.estudiante.value, self.diccionario_estudiantes, self.seleccion_temas.value,
+                                   self.seleccion_fechas.value, self.fechas, self.opcion.value, self.opcion2.value,
+                                   self.color.value, documento, self.nombre_documento.value + ".pdf", self.carpeta.value,
+                                   self.diseno.value)
+        else:
+            texto = "Para poder descargar el documento PDF es necesario indicar el nombre."
+            print(colored(texto, 'red', attrs=['bold']))
 
 
 '''
@@ -1101,7 +1113,7 @@ de acceso de los alumnos.
 
   - diccionario_registros: Diccionario con los estudiantes y sus registros de acceso. La clave del diccionario es el 
   identificador del estudiante y para cada clave su valor es un array de objetos de tipo Registros.
-  - carpeta: Ubicación del fichero que se quiere cargar.
+  - diccionario_estudiantes: Diccionario con los objetos de tipo estudiante.
   - uploader: Objeto de la librería ipywidgets que contiene el fichero seleccionado cuya información se quiere cargar.
   - button: objeto de tipo Button de la librería ipywidgets que representa el botón.
 
@@ -1116,8 +1128,8 @@ fichero.
 
 class Boton_registros:
 
-    def __init__(self, uploader, diccionario_registros):
-        self.diccionario_registros = diccionario_registros
+    def __init__(self, uploader, diccionario_estudiantes):
+        self.diccionario_estudiantes = diccionario_estudiantes
         self.uploader = uploader
         self.button = widgets.Button(description="Aceptar")
         self.button.on_click(self.on_button_clicked)
@@ -1145,9 +1157,9 @@ class Boton_registros:
                 fichero = list(self.uploader.value.keys())[0]
             '''
             fichero = fichero = self.uploader.selected
-            self.diccionario_registros = fichero_registros(fichero, self.diccionario_registros)
+            self.diccionario_estudiantes = fichero_registros(fichero, self.diccionario_estudiantes)
 
-            if self.diccionario_registros is None:
+            if self.diccionario_estudiantes is None:
 
                 text = 'No se ha encontrado el fichero en la ruta indicada.'
                 myLabel = widgets.HTML(value=f"<b><font color='red'>{text}</b>")
@@ -1167,7 +1179,7 @@ class Boton_registros:
 
                 b = widgets.HBox()
 
-                botons = Boton_registros_s(self.uploader, self.diccionario_registros, b)
+                botons = Boton_registros_s(self.uploader, self.diccionario_estudiantes, b)
                 # display(botons.button)
 
                 botonn = Boton_ficheros_n(b)
@@ -1198,28 +1210,14 @@ Cuando se pulsa el botón se muestrá un objeto de tipo Boton_registros para con
 
 class Boton_registros_s:
 
-    def __init__(self, uploader, diccionario_registros, b):
+    def __init__(self, uploader, diccionario_estudiantes, b):
         self.box = b
         self.button = widgets.Button(description="Si")
         self.button.on_click(self.on_button_clicked)
-        self.diccionario_registros = diccionario_registros
+        self.diccionario_estudiantes = diccionario_estudiantes
         self.uploader = uploader
 
     def on_button_clicked(self, b):
-        '''p = widgets.Label(value="AVISO: Los ficheros se cargan desde la raíz de la carpeta.")
-        display(p)
-        p = widgets.Label(value="AVISO: Si los ficheros se encuentran en una subcarpeta, indique la ruta:")
-        display(p)
-        p = widgets.Label(value="Ejemplo:C:\\Users\\user\\Documents\\Registros")
-        display(p)
-
-        carpeta = widgets.Text(
-            value='',
-            placeholder='Carpeta',
-            description='Carpeta:',
-            disabled=False
-        )
-        display(carpeta)'''
 
         uploader = FileChooser()
         # uploader = widgets.FileUpload()
@@ -1229,7 +1227,7 @@ class Boton_registros_s:
         display(p)
         display(uploader)
 
-        boton = Boton_registros(uploader, self.diccionario_registros)
+        boton = Boton_registros(uploader, self.diccionario_estudiantes)
         self.box.layout.visibility = 'hidden'
         display(boton.button)
 
@@ -1288,10 +1286,10 @@ el análisis de sus registros de acceso a la plataforma Moodle.
 
 class Boton_grafica_registros:
 
-    def __init__(self, identificador, d_r, s_f, fs, estudiante, color, IP, diseno):
+    def __init__(self, identificador, s_f, fs, estudiante, color, IP, diseno, d_e):
         self.identificador = identificador
         self.estudiante = estudiante
-        self.diccionario_registros = d_r
+        self.diccionario_estudiantes = d_e
         self.seleccion_fechas = s_f
         self.fechas = fs
         self.color = color
@@ -1301,9 +1299,17 @@ class Boton_grafica_registros:
         self.diseno = diseno
 
     def on_button_clicked(self, b):
-        Grafica_registros(self.identificador.value, self.diccionario_registros, self.seleccion_fechas.value,
-                          self.fechas, self.estudiante.value,
-                          self.color.value, self.IP.value, self.diseno.value)
+
+        if self.identificador.value != "":
+
+            Grafica_registros(self.identificador.value, self.seleccion_fechas.value,
+                              self.fechas, self.estudiante.value,
+                              self.color.value, self.IP.value, self.diseno.value, self.diccionario_estudiantes)
+
+        else:
+            texto = "Para poder ejecutar esta opción es necesario indicar el identificador del recurso de Moodle a " \
+                    "cuyos registros se desea acceder"
+            print(colored(texto, 'red', attrs=['bold']))
 
 
 '''
@@ -1337,11 +1343,10 @@ el análisis de sus registros de acceso a la plataforma Moodle.
 
 class Boton_grafica_registros_pdf:
 
-    def __init__(self, identificador, d_r, s_f, fs, estudiante, color, nombre_documento, carpeta, IP,
-                 diseno):
+    def __init__(self, identificador, s_f, fs, estudiante, color, nombre_documento, carpeta, IP, diseno, d_e):
         self.identificador = identificador
         self.estudiante = estudiante
-        self.diccionario_registros = d_r
+        self.diccionario_estudiantes = d_e
         self.seleccion_fechas = s_f
         self.fechas = fs
         self.color = color
@@ -1354,13 +1359,17 @@ class Boton_grafica_registros_pdf:
         self.diseno = diseno
 
     def on_button_clicked(self, b):
-        documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
-        documento.setPageSize(A4)
+        if self.nombre_documento.value != "":
+            documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
+            documento.setPageSize(A4)
 
-        Grafica_registros_pdf(self.identificador.value, self.diccionario_registros, self.seleccion_fechas.value,
-                              self.fechas, self.estudiante.value,
-                              self.color.value, documento, self.nombre_documento.value + ".pdf", self.carpeta.value,
-                              self.IP.value, self.diseno.value)
+            Grafica_registros_pdf(self.identificador.value, self.seleccion_fechas.value,
+                                  self.fechas, self.estudiante.value,
+                                  self.color.value, documento, self.nombre_documento.value + ".pdf", self.carpeta.value,
+                                  self.IP.value, self.diseno.value, self.diccionario_estudiantes)
+        else:
+            texto = "Para poder descargar el documento PDF es necesario indicar el nombre."
+            print(colored(texto, 'red', attrs=['bold']))
 
 
 '''
@@ -1433,9 +1442,13 @@ class Boton_graficas_comparacion_PDF:
         self.carpeta = carpeta
 
     def on_button_clicked(self, b):
-        documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
-        documento.setPageSize(A4)
+        if self.nombre_documento.value != "":
+            documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
+            documento.setPageSize(A4)
 
-        Grafica_test_comparacion_PDF(self.seleccion_fechas.value, self.fechas, self.opcion2.value,
-                                     self.diseno.value, self.ficheros.value, self.documentos,
-                                     documento, self.nombre_documento.value + ".pdf", self.carpeta.value)
+            Grafica_test_comparacion_PDF(self.seleccion_fechas.value, self.fechas, self.opcion2.value,
+                                         self.diseno.value, self.ficheros.value, self.documentos,
+                                         documento, self.nombre_documento.value + ".pdf", self.carpeta.value)
+        else:
+            texto = "Para poder descargar el documento PDF es necesario indicar el nombre."
+            print(colored(texto, 'red', attrs=['bold']))

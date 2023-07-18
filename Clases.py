@@ -33,9 +33,10 @@ Recoge la información de cada uno de los alumnos:
 
 class Estudiante:
 
-    def __init__(self, identificador, pruebas):
+    def __init__(self, identificador, pruebas, registros):
         self.identificador = identificador
         self.pruebas = pruebas
+        self.registros = registros
         self.paux = []
 
 

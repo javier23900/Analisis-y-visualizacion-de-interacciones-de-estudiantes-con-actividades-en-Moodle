@@ -21,7 +21,8 @@ a un recurso indicado para los intervalos de tiempo deseados.
 '''
 
 
-def Grafica_registros(identificador, diccionario, s_fechas, fechas, estudiantes, color, IP, diseno):
+def Grafica_registros(identificador, s_fechas, fechas, estudiantes, color, IP, diseno,
+                      diccionario_estudiantes):
     etiqueta = "Accesos"
     contador = 0
 
@@ -40,7 +41,7 @@ def Grafica_registros(identificador, diccionario, s_fechas, fechas, estudiantes,
 
     if estudiantes[0] == "Todos":
         estudiantes = []
-        for e in diccionario.keys():
+        for e in diccionario_estudiantes.keys():
             estudiantes.append(e)
 
     if estudiantes[0] == "Grupo":
@@ -57,9 +58,8 @@ def Grafica_registros(identificador, diccionario, s_fechas, fechas, estudiantes,
             x.append(str(f[0]).split(' ')[0] + " / " + str(f[1]).split(' ')[0])
 
             contador = 0
-
-            for e in diccionario:
-                for r in diccionario[e]:
+            for e in diccionario_estudiantes:
+                for r in diccionario_estudiantes[e].registros:
                     if f[0] <= r.fecha <= f[1]:
                         if IP != '':
                             print(IP)
@@ -111,7 +111,7 @@ def Grafica_registros(identificador, diccionario, s_fechas, fechas, estudiantes,
                 print("-----------------------------------------------------------------------------")
                 x.append(str(f[0]).split(' ')[0] + " / " + str(f[1]).split(' ')[0])
 
-                for r in diccionario[e]:
+                for r in diccionario_estudiantes[e].registros:
                     if f[0] <= r.fecha <= f[1]:
                         if IP != '':
                             if identificador in r.descripcion and r.IP == IP:

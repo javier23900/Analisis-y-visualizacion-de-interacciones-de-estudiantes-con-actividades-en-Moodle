@@ -219,7 +219,7 @@ def test_por_alumno(nombre_archivo, estudiantes, tema):
 
             for id in tests.keys():
                 if id not in estudiantes:
-                    estudiante = Estudiante(id, {})
+                    estudiante = Estudiante(id, {}, {})
                     estudiantes[id] = estudiante
                     for t in tests[id].keys():
                         if t not in estudiantes[id].pruebas:
@@ -279,7 +279,7 @@ def leer_registros(nombre_archivo, registros): Función encargada de abrir y lee
 '''
 
 
-def fichero_registros(nombre_archivo, registros):
+def fichero_registros(nombre_archivo, estudiantes):
 
     try:
         with open(nombre_archivo, "r") as archivo:
@@ -289,13 +289,15 @@ def fichero_registros(nombre_archivo, registros):
             for fila in lector:
                 r = leer_registros(fila)
                 if len(fila) > 1:
-                    if r.identificador not in registros:
-                        registros[r.identificador] = []
-                        registros[r.identificador].append(r)
-                    else:
-                        registros[r.identificador].append(r)
 
-        return registros
+                    if r.identificador not in estudiantes:
+                        estudiantes[r.identificador] = Estudiante(id, {}, {})
+                        estudiantes[r.identificador].registros = []
+                        estudiantes[r.identificador].registros.append(r)
+                    else:
+                        estudiantes[r.identificador].registros.append(r)
+
+        return estudiantes
 
     except FileNotFoundError:
         return None

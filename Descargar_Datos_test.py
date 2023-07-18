@@ -76,7 +76,8 @@ def analisis_fechas_temario_pdf(diccionario, temas, s_fechas, fechas, documento,
         cursor = 75
 
     documento.save()
-    shutil.move(nombre_documento, carpeta)
+    if carpeta != "":
+        shutil.move(nombre_documento, carpeta)
 
     '''
   def analisis_temario_fechas_pdf(diccionario, temas, s_fechas, fechas, documento): Función encargada de analizar los test para una serie de intervalos de fechas para una serie de temas y descargar el documento pdf correspondiente con dicha información.
@@ -153,7 +154,8 @@ def analisis_temario_fechas_pdf(diccionario, temas, s_fechas, fechas, documento,
         cursor = 75
 
     documento.save()
-    shutil.move(nombre_documento, carpeta)
+    if carpeta != "":
+        shutil.move(nombre_documento, carpeta)
 
 
 '''
@@ -355,7 +357,9 @@ def ranking_test_pdf(diccionario, s_fechas, fechas, opcion, documento, nombre_do
         cursor = 75
 
     documento.save()
-    shutil.move(nombre_documento, carpeta)
+    if carpeta != "":
+        shutil.move(nombre_documento, carpeta)
+
 
     '''
   Resultados_estudiante_pdf(identificador, pruebas, temas, s_fechas, fechas, opcion, documento): Función encargada de analizar los test realizados por un estudiante y descargar el documento pdf correspondiente con dicha información.
@@ -523,7 +527,8 @@ def Resultados_estudiante_pdf(identificador, estudiantes, temas, s_fechas, fecha
                 cursor = 75
 
     documento.save()
-    shutil.move(nombre_documento, carpeta)
+    if carpeta != "":
+        shutil.move(nombre_documento, carpeta)
 
 
 '''
@@ -713,7 +718,8 @@ def ranking_test_estudiante_pdf(identificador, estudiantes, s_fechas, fechas, op
         cursor = 75
 
     documento.save()
-    shutil.move(str(nombre_documento), carpeta)
+    if carpeta != "":
+        shutil.move(nombre_documento, carpeta)
 
     '''
   def ranking_estudiantes_pdf(identificador, estudiantes, s_temas, temas, s_fechas, fechas, opcion, documento): Función encargada de ordenar a los estudiantes de mejores a peores para una serie de valores en ciertos intervalos de tiempo y descargar el documento pdf correspondiente con dicha información.
@@ -889,5 +895,6 @@ def ranking_estudiantes_pdf(estudiantes, s_temas, temas, s_fechas, fechas, opcio
             cursor = 75
 
     documento.save()
-    print(str(nombre_documento))
-    shutil.move(str(nombre_documento), carpeta)
+
+    if carpeta != "":
+        shutil.move(nombre_documento, carpeta)
