@@ -26,9 +26,9 @@ realizados por los alumnos.
   diccionario es la fecha en la que se realizó el test y para cada clave su valor es un array que contiene un conjunto 
   de arrays con los test de cada tema realizados por los estudiantes en dicha fecha.
   - tema: Tema del test cuyo fichero e información se quiere cargar.
-  - carpeta: Ubicación del fichero que se quiere cargar.
-  - uploader: Objeto de la librería ipywidgets que contiene el fichero seleccionado cuya información se quiere cargar.
-  - button: objeto de tipo Button de la librería ipywidgets que representa el botón.
+  - fichero: Fichero seleccionado para su lectura
+  - button: Objeto de tipo Button de la librería ipywidgets que representa el botón.
+  - documentos: Array con los documentos incororados a la herramienta.
 
 
 Cuando se pulsa el botón se ejecuta la funcion encargada de leer el contenido del fichero y cargar la información 
@@ -81,12 +81,6 @@ class Boton_ficheros:
         else:
             self.button.layout.visibility = 'hidden'
 
-            '''if self.uploader_path is not None:
-                print(self.uploader_path)
-                print(self.uploader_filename)
-                fichero = os.path.join(self.uploader_path, self.uploader_filename)
-            else:
-                fichero = self.uploader_filename'''
             fichero = self.fichero.selected
 
             self.diccionario_tema = lectura_tema(fichero, self.diccionario_tema, self.tema.value)
@@ -119,10 +113,8 @@ class Boton_ficheros:
 
                 botons = Boton_ficheros_s(self.tema, self.fichero, self.diccionario_tema,
                                           self.diccionario_fecha, b, self.diccionario_estudiantes, self.documentos)
-                # display(botons.button)
 
                 botonn = Boton_ficheros_n(b)
-                # display(botonn.button)
 
                 botones = [botons.button, botonn.button]
 
@@ -150,7 +142,9 @@ información de los test realizados por los alumnos.
   diccionario tiene como clave el tema al que pertenecen los test y para cada clave su valor es un array que contiene 
   los test realizados por los estudiantes.
   - tema: Tema del test cuyo fichero e información se quiere cargar.
-  - uploader: Objeto de la librería ipywidgets que contiene el fichero seleccionado cuya información se quiere cargar.
+  - fichero: Fichero seleccionado para su lectura
+  - documentos: Array con los documentos incororados a la herramienta.
+  
 
 Cuando se pulsa el botón se muestrá un objeto de tipo Boton_ficheros para continuar la ejecución.
 '''
@@ -178,10 +172,8 @@ class Boton_ficheros_s:
             disabled=False
         )
 
-        # uploader = widgets.FileUpload()
         uploader = FileChooser()
 
-        # elegir_tema(tema, uploader)
         p = widgets.Label(value="Introduce el tema al que se corresponde el fichero: ")
         display(p)
         display(tema)
@@ -286,10 +278,8 @@ class Boton_fechas:
             b = widgets.HBox()
 
             botons = Boton_fechas_s(self.fecha_inicio, self.fecha_final, self.fechas, b)
-            # display(botons.button)
 
             botonn = Boton_fechas_n(b)
-            # display(botonn.button)
 
             botones = [botons.button, botonn.button]
 
@@ -464,13 +454,13 @@ class Boton_proceso_temafecha_pdf:
             documento.setPageSize(A4)
 
             if self.opcion.value == "Temas x Fecha":
-                analisis_temario_fechas_pdf(self.diccionario_tema, self.seleccion_temas.value, self.seleccion_fechas.value,
-                                            self.fechas, documento, self.nombre_documento.value + ".pdf",
-                                            self.carpeta.value)
+                analisis_temario_fechas_pdf(self.diccionario_tema, self.seleccion_temas.value,
+                                            self.seleccion_fechas.value, self.fechas, documento,
+                                            self.nombre_documento.value + ".pdf", self.carpeta.value)
             elif self.opcion.value == "Fecha x Temas":
-                analisis_fechas_temario_pdf(self.diccionario_tema, self.seleccion_temas.value, self.seleccion_fechas.value,
-                                            self.fechas, documento, self.nombre_documento.value + ".pdf",
-                                            self.carpeta.value)
+                analisis_fechas_temario_pdf(self.diccionario_tema, self.seleccion_temas.value,
+                                            self.seleccion_fechas.value, self.fechas, documento,
+                                            self.nombre_documento.value + ".pdf", self.carpeta.value)
         else:
             texto = "Para poder descargar el documento PDF es necesario indicar el nombre."
             print(colored(texto, 'red', attrs=['bold']))
@@ -554,8 +544,8 @@ class Boton_proceso_ranking_pdf:
             documento = canvas.Canvas(self.nombre_documento.value + ".pdf")
             documento.setPageSize(A4)
 
-            ranking_test_pdf(self.diccionario_tema, self.seleccion_fechas.value, self.fechas, self.opcion.value, documento,
-                             self.nombre_documento.value + ".pdf", self.carpeta.value)
+            ranking_test_pdf(self.diccionario_tema, self.seleccion_fechas.value, self.fechas,
+                             self.opcion.value, documento, self.nombre_documento.value + ".pdf", self.carpeta.value)
         else:
             texto = "Para poder descargar el documento PDF es necesario indicar el nombre."
             print(colored(texto, 'red', attrs=['bold']))
@@ -571,9 +561,9 @@ información obtenida de los test realizados por los alumnos.
   - opcion: Objeto de tipo RadioButtons de la libreria ipywidgets con la opción de análisis deseada.
   - opcion2: Opción para el valor que se desea mostrar en las gráficas (nota media, test finalizados, test aprobados o 
   porcentaje de aprobados).
-  - diccionario_tema: La función devuelve un diccionario con los test realizados por los estudiantes. La clave del 
-  diccionario es el tema al que pertenecen los test y para cada clave su valor es un array que contiene un conjunto de 
-  arrays con los test realizados por los estudiantes.
+  - diccionario_tema: Diccionario con los test realizados por los estudiantes. La clave del diccionario es el tema al 
+  que pertenecen los test y para cada clave su valor es un array que contiene un conjunto de arrays con los test 
+  realizados por los estudiantes.
   - seleccion_temas: Objeto de tipo SelectMultiple de la libreria ipywidgets con los temas seleccionados para los cuales 
   se quiere ejecutar el análisis.
   - seleccion_fechas: bjeto de tipo SelectMultiple de la libreria ipywidgets con los intervalos de fechas seleccionados 
@@ -625,9 +615,9 @@ correspondientes a una de las opciones de análisis de la información obtenida 
   - opcion: Objeto de tipo RadioButtons de la libreria ipywidgets con la opción de análisis deseada.
   - opcion2: Opción para el valor que se desea mostrar en las gráficas (nota media, test finalizados, test aprobados o 
   porcentaje de aprobados).
-  - diccionario_tema: La función devuelve un diccionario con los test realizados por los estudiantes. La clave del 
-  diccionario es el tema al que pertenecen los test y para cada clave su valor es un array que contiene un conjunto de 
-  arrays con los test realizados por los estudiantes.
+  - diccionario_tema: Diccionario con los test realizados por los estudiantes. La clave del diccionario es el tema al 
+  que pertenecen los test y para cada clave su valor es un array que contiene un conjunto de arrays con los test 
+  realizados por los estudiantes.
   - seleccion_temas: Objeto de tipo SelectMultiple de la libreria ipywidgets con los temas seleccionados para los cuales 
   se quiere ejecutar el análisis.
   - seleccion_fechas: bjeto de tipo SelectMultiple de la libreria ipywidgets con los intervalos de fechas seleccionados 
@@ -636,7 +626,6 @@ correspondientes a una de las opciones de análisis de la información obtenida 
   - button: objeto de tipo Button de la librería ipywidgets que representa el botón.
   - nombre_documento = Nombre del documento.
   - carpeta: Carpeta destino para el documento a descargar
-  - carpeta2: Carpeta destino para la gráfica a descargar
   - diseno: opción para el diseño de la gráfica
 
 Cuando se pulsa el botón se ejecuta una de entre dos opciones de gráficas para el análisis de datos obtenidos a partir 
@@ -694,9 +683,10 @@ test realizados por los alumnos, centrándonos en los datos individuales de cada
   - opcion: Objeto de tipo RadioButtons de la libreria ipywidgets con la opción de análisis deseada.
   - estudiante: Objeto de tipo Dropdown de la librería ipywidgets que indica el estudiante del cual se quiere obtener 
   los resultados.
-  - diccionario_tema: La función devuelve un diccionario con los test realizados por los estudiantes. La clave del 
-  diccionario es el tema al que pertenecen los test y para cada clave su valor es un array que contiene un conjunto de 
-  arrays con los test realizados por los estudiantes.
+  - diccionario_estudiantes: Diccionario con los estudiantes y sus test realizados. La clave del diccionario es el 
+  identificador del estudiante y para cada clave su valor es un diccionario con los test. Este segundo diccionario tiene
+  como clave el tema al que pertenecen los test y para cada clave su valor es un array que contiene los test realizados 
+  por los estudiantes.
   - seleccion_temas: Objeto de tipo SelectMultiple de la libreria ipywidgets con los temas seleccionados para los cuales 
   se quiere ejecutar el análisis.
   - seleccion_fechas: bjeto de tipo SelectMultiple de la libreria ipywidgets con los intervalos de fechas seleccionados 
@@ -732,9 +722,9 @@ obtenidos de los test realizados por los alumnos, centrándonos en los datos ind
   - opcion: Objeto de tipo RadioButtons de la libreria ipywidgets con la opción de análisis deseada.
   - estudiante: Objeto de tipo Dropdown de la librería ipywidgets que indica el estudiante del cual se quiere obtener 
   los resultados.
-  - diccionario_tema: La función devuelve un diccionario con los test realizados por los estudiantes. La clave del 
-  diccionario es el tema al que pertenecen los test y para cada clave su valor es un array que contiene un conjunto de 
-  arrays con los test realizados por los estudiantes.
+  - diccionario_tema: Diccionario con los test realizados por los estudiantes. La clave del diccionario es el tema al 
+  que pertenecen los test y para cada clave su valor es un array que contiene un conjunto de arrays con los test 
+  realizados por los estudiantes.
   - seleccion_temas: Objeto de tipo SelectMultiple de la libreria ipywidgets con los temas seleccionados para los cuales 
   se quiere ejecutar el análisis.
   - seleccion_fechas: bjeto de tipo SelectMultiple de la libreria ipywidgets con los intervalos de fechas seleccionados 
@@ -742,7 +732,6 @@ obtenidos de los test realizados por los alumnos, centrándonos en los datos ind
   - fechas: Array donde se van a almacenar los intervalos de fechas seleccionados.
   - button: objeto de tipo Button de la librería ipywidgets que representa el botón.
   - nombre_documento: Nombre del documento.
-  - nombre_documento = Nombre del documento.
   - carpeta: Carpeta destino para el documento a descargar
 '''
 
@@ -1111,9 +1100,8 @@ CLASE BOTON_REGISTROS
 La clase representa el botón empleado para cargar los ficheros correspondientes con la información de los registros 
 de acceso de los alumnos.
 
-  - diccionario_registros: Diccionario con los estudiantes y sus registros de acceso. La clave del diccionario es el 
+  - diccionario_estudiantes: Diccionario con los estudiantes y sus registros de acceso. La clave del diccionario es el 
   identificador del estudiante y para cada clave su valor es un array de objetos de tipo Registros.
-  - diccionario_estudiantes: Diccionario con los objetos de tipo estudiante.
   - uploader: Objeto de la librería ipywidgets que contiene el fichero seleccionado cuya información se quiere cargar.
   - button: objeto de tipo Button de la librería ipywidgets que representa el botón.
 
@@ -1151,12 +1139,7 @@ class Boton_registros:
         else:
             self.button.layout.visibility = 'hidden'
 
-            '''if self.carpeta.value != '':
-                fichero = os.path.join(self.carpeta.value, list(self.uploader.value.keys())[0])
-            else:
-                fichero = list(self.uploader.value.keys())[0]
-            '''
-            fichero = fichero = self.uploader.selected
+            fichero = self.uploader.selected
             self.diccionario_estudiantes = fichero_registros(fichero, self.diccionario_estudiantes)
 
             if self.diccionario_estudiantes is None:
@@ -1180,10 +1163,8 @@ class Boton_registros:
                 b = widgets.HBox()
 
                 botons = Boton_registros_s(self.uploader, self.diccionario_estudiantes, b)
-                # display(botons.button)
 
                 botonn = Boton_ficheros_n(b)
-                # display(botonn.button)
 
                 botones = [botons.button, botonn.button]
 
@@ -1200,7 +1181,7 @@ alumnos.
   - box: objeto de tipo HBox de la librería ipywidgets que contiene un objeto de tipo Boton_registros_s y otro objeto de 
   tipo Boton_registros_n.
   - button: objeto de tipo Button de la librería ipywidgets que representa el botón.
-  - diccionario_registros: Diccionario con los estudiantes y sus registros de acceso. La clave del diccionario es el 
+  - diccionario_estudiantes: Diccionario con los estudiantes y sus registros de acceso. La clave del diccionario es el 
   identificador del estudiante y para cada clave su valor es un array de objetos de tipo Registros.
   - uploader: Objeto de la librería ipywidgets que contiene el fichero seleccionado cuya información se quiere cargar.
 
@@ -1220,9 +1201,7 @@ class Boton_registros_s:
     def on_button_clicked(self, b):
 
         uploader = FileChooser()
-        # uploader = widgets.FileUpload()
 
-        # elegir_tema(tema, uploader)
         p = widgets.Label(value="Introduce el tema al que se corresponde el fichero: ")
         display(p)
         display(uploader)
@@ -1268,16 +1247,16 @@ al análisis de la información obtenida de los registros de acceso de los estud
     - identificador: Objeto de tipo Text de la libreria ipywidgets para indicar el identificador del recurso de Moodle 
     cuya información se desea obtener.
     - estudiante: objeto de tipo SelectMultiple de la libreria ipywidgets con los estudiantes seleccionados para los 
-  cuales se quiere ejecutar el análisis.
-  - diccionario_registros: Diccionario con los estudiantes y sus registros de acceso a Moodle. La clave del diccionario 
-  es el identificador del estudiante. Para cada clave su valor es un array con objetos de tipo 'Registro' que contienen los accesos a Moodle del estudiante 
-  para cada uno de los temas en una semana en concreto
-  - seleccion_fechas: objeto de tipo SelectMultiple de la libreria ipywidgets con los intervalos de fechas seleccionados 
-  para los cuales se quiere ejecutar el análisis.
-  - fechas: Array donde se van a almacenar los intervalos de fechas seleccionados.
-  - color: Color seleccionado para las barras de la gráfica.
-  - button: objeto de tipo Button de la librería ipywidgets que representa el botón.
-  - diseno: Opción para el diseño de la gráfica
+    cuales se quiere ejecutar el análisis.
+    - diccionario_estudiantes: Diccionario con los estudiantes y sus registros de acceso. La clave del diccionario es el 
+    identificador del estudiante y para cada clave su valor es un array de objetos de tipo Registros.
+    - seleccion_fechas: objeto de tipo SelectMultiple de la libreria ipywidgets con los intervalos de fechas seleccionados 
+    para los cuales se quiere ejecutar el análisis.
+    - fechas: Array donde se van a almacenar los intervalos de fechas seleccionados.
+    - color: Color seleccionado para las barras de la gráfica.
+    - button: objeto de tipo Button de la librería ipywidgets que representa el botón.
+    - IP: Dirección IP desde la que se ha generado el evento.
+    - diseno: Opción para el diseño de la gráfica
 
 Cuando se pulsa el botón se realiza, para cada uno de los estudiantes seleccionados o para el grupo en general,
 el análisis de sus registros de acceso a la plataforma Moodle.
@@ -1322,19 +1301,18 @@ Moodle.
     - identificador: Objeto de tipo Text de la libreria ipywidgets para indicar el identificador del recurso de Moodle 
     cuya información se desea obtener.
     - estudiante: objeto de tipo SelectMultiple de la libreria ipywidgets con los estudiantes seleccionados para los 
-  cuales se quiere ejecutar el análisis.
-  - diccionario_registros: Diccionario con los estudiantes y sus registros de acceso a Moodle. La clave del diccionario 
-  es el identificador del estudiante. Para cada clave su valor es un array con objetos de tipo 'Registro' que contienen 
-  los accesos a Moodle del estudiante.
-  - seleccion_fechas: objeto de tipo SelectMultiple de la libreria ipywidgets con los intervalos de fechas seleccionados 
-  para los cuales se quiere ejecutar el análisis.
-  - fechas: Array donde se van a almacenar los intervalos de fechas seleccionados.
-  - color: Color seleccionado para las barras de la gráfica.
-  - button: objeto de tipo Button de la librería ipywidgets que representa el botón.
-  - nombre_documento: Nombre del documento.
-  - carpeta: Carpeta destino para el documento a descargar
-  - carpeta2: Carpeta destino para la gráfica a descargar
-  - diseno: Opción para el diseño de la gráfica
+    cuales se quiere ejecutar el análisis.
+    - diccionario_estudiantes: Diccionario con los estudiantes y sus registros de acceso. La clave del diccionario es el 
+    identificador del estudiante y para cada clave su valor es un array de objetos de tipo Registros.
+    - seleccion_fechas: objeto de tipo SelectMultiple de la libreria ipywidgets con los intervalos de fechas seleccionados 
+    para los cuales se quiere ejecutar el análisis.
+    - fechas: Array donde se van a almacenar los intervalos de fechas seleccionados.
+    - color: Color seleccionado para las barras de la gráfica.
+    - button: objeto de tipo Button de la librería ipywidgets que representa el botón.
+    - nombre_documento: Nombre del documento.
+    - carpeta: Carpeta destino para el documento a descargar
+    - IP: Dirección IP desde la que se ha generado el evento.
+    - diseno: Opción para el diseño de la gráfica
 
 Cuando se pulsa el botón se realiza para cada uno de los estudiantes seleccionados o para el grupo en general,
 el análisis de sus registros de acceso a la plataforma Moodle.
@@ -1377,15 +1355,17 @@ CLASE BOTON_GRAFICAS_COMPARACION
 
 La clase representa el botón empleado para generar las gráficas comparativas correspondientes a una de las opciones de 
 análisis de la información obtenida de los test realizados por los alumnos.
-
-  - seleccion_fechas: bjeto de tipo SelectMultiple de la libreria ipywidgets con los intervalos de fechas seleccionados 
-  para los cuales se quiere ejecutar el análisis.
-  - fechas: Array donde se van a almacenar los intervalos de fechas seleccionados.
-  - color: Color deseado para las barras de la gráfica.
-  - opcion2: Opción para el valor que se desea mostrar en las gráficas (nota media, test finalizados, test aprobados o 
+    
+    - opcion2: Opción para el valor que se desea mostrar en las gráficas (nota media, test finalizados, test aprobados o 
     porcentaje de aprobados).
-  - button: objeto de tipo Button de la librería ipywidgets que representa el botón.
-  - diseno: opción para el diseño de la gráfica
+    - seleccion_fechas: bjeto de tipo SelectMultiple de la libreria ipywidgets con los intervalos de fechas seleccionados 
+    para los cuales se quiere ejecutar el análisis.
+    - fechas: Array donde se van a almacenar los intervalos de fechas seleccionados.
+    - color: Color deseado para las barras de la gráfica.
+    - button: objeto de tipo Button de la librería ipywidgets que representa el botón.
+    - diseno: opción para el diseño de la gráfica.
+    - fichero: Fichero seleccionado para su lectura
+    - documentos: Array con los documentos incororados a la herramienta.
 
 '''
 
@@ -1422,7 +1402,6 @@ class Boton_graficas_comparacion:
       . documentos: Array con los documentos añadidos a la herramienta.
       - nombre_documento: Nombre del documento.
       - carpeta: Carpeta destino para el documento a descargar
-      - carpeta2: Carpeta destino para la gráfica a descargar
 
     '''
 
@@ -1430,9 +1409,10 @@ class Boton_graficas_comparacion:
 class Boton_graficas_comparacion_PDF:
 
     def __init__(self, s_f, fs, opcion2, diseno, ficheros, documentos, nombre_documento, carpeta):
-        self.opcion2 = opcion2
+
         self.seleccion_fechas = s_f
         self.fechas = fs
+        self.opcion2 = opcion2
         self.button = widgets.Button(description="Descargar")
         self.button.on_click(self.on_button_clicked)
         self.diseno = diseno

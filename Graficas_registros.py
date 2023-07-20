@@ -9,15 +9,14 @@ a un recurso indicado para los intervalos de tiempo deseados.
 
     - Argumentos:
         - identificador: Identidicador del recurso de Moodle.
-        - diccionario: Diccionario con los estudiantes y sus registros de acceso a Moodle. La clave del diccionario 
-        es el identificador del estudiante. Para cada clave su valor es un array con objetos de tipo 'Registro' que contienen 
-        los accesos a Moodle del estudiante.
         - s_fechas: Intervalos de fechas seleccionados para los cuales se quiere obtener los resultados. 
         - fechas: Array con los intervalos de fechas.
         - estudiantes: Estudiantes seleccionados para los que se desea obtener la información.
         - color: Color para las barras de las gráficas.
         - IP: Dirección IP desde la cual se ha accedido a Moodle.
         - diseno: Opción para el diseño de la gráfica
+        - diccionario_estudiantes: Diccionario con los estudiantes y sus registros de acceso. La clave del diccionario 
+        es el identificador del estudiante y para cada clave su valor es un array de objetos de tipo Registros.
 '''
 
 

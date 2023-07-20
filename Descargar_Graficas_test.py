@@ -894,17 +894,15 @@ La función muestra para una serie de intervalos de tiempo una gráfica comparan
 (nota media, test finalizados, test aprobados o porcentaje de aprobados) para varios temas, para varios ficheros.
 
   - Argumentos:
-      - diccionario: Diccionario que contiene los tests realizados por los estudiantes para cada uno de los temas 
-      (la clave son los temas de los test y sus valores un array con los test realizados por los estudiantes).
       - s_fechas: Intervalos de fechas seleccionados para los cuales se quiere obtener los resultados. 
       - fechas: Array con los intervalos de fechas.
       - opcion: Opción para el valor que se desea mostrar en las gráficas.
-      - color: Color deseado para las barras de la gráfica.
       - diseno: opción para el diseño de la gráfica
       - ficheros: ficheros que se desea comparar
+      - documentos: Array con los documentos incorporados a la herramienta.
+      - documento: Objeto que representa el documento a descargar.
       - nombre_documento: Nombre del documento.
       - carpeta: Carpeta destino para el documento a descargar
-      - carpeta2: Carpeta destino para la gráfica a descargar
 '''
 
 
@@ -1136,8 +1134,6 @@ def Grafica_test_comparacion_PDF(s_fechas, fechas, opcion, diseno, ficheros, doc
     plt.xticks(np.arange(n), x)
     plt.legend(loc='best')
 
-    # plt.show()
-
     if h - cursor < 300:
         documento.showPage()
         documento.setFont("Times-Roman", 12)
@@ -1147,7 +1143,6 @@ def Grafica_test_comparacion_PDF(s_fechas, fechas, opcion, diseno, ficheros, doc
 
     cursor += 220
     documento.drawImage(nombre_fichero, 50, h - int(cursor))
-    # shutil.move(nombre_fichero, carpeta2)
     os.remove(nombre_fichero)
 
     documento.save()

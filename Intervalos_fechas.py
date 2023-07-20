@@ -23,8 +23,6 @@ def seleccionar_fechas(fechas):
         disabled=False
     )
 
-    # elegir_fecha(fecha_inicio, fecha_final)
-
     p = widgets.Label(value="Introduce el intervalo de fechas: ")
     display(p)
 

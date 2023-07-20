@@ -64,32 +64,6 @@ def leer(fila, tema):
 
     return t
 
-
-'''
-def leer_fichero_test(nombre_archivo): Función encargada de abrir y leer el contenido del fichero.
-  - Argumentos:
-      - nombre_archivo: Nombre del archivo.
-  - Resultado: La función devuelve un array con los objetos de tipo prueba obtenidos a partir de la información del 
-  fichero.
-'''
-
-
-'''def leer_fichero_test(nombre_archivo, tema):
-    try:
-        with open(nombre_archivo, "r") as archivo:
-            tests = []
-
-            lector = csv.reader(archivo, delimiter=",")
-            next(lector, None)
-            for fila in lector:
-                tests.append(leer(fila, tema))
-
-            return tests
-
-    except FileNotFoundError:
-        return None'''
-
-
 '''
 def lectura_tema(archivo, diccionario_tema, tema): La función se encarga de leer el contenido del fichero y 
 organizar los test realizados por los estudiantes por tema.
@@ -269,7 +243,7 @@ def leer_registros(fila):
 
 
 '''
-def leer_registros(nombre_archivo, registros): Función encargada de abrir y leer el contenido del fichero.
+def leer_registros(nombre_archivo, estudiantes): Función encargada de abrir y leer el contenido del fichero.
   - Argumentos:
       - nombre_archivo: Nombre del archivo.
       - registros: Diccionario con los accesos semanales a Moodle de cada uno de los estudiantes.

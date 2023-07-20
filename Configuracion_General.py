@@ -20,7 +20,6 @@ Función encargada de generar las opciones de configuración y ejecución del no
 
 
 def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas):
-
     if (diccionario_tema == {} and diccionario_estudiantes == {}) or (len(fechas) < 1):
 
         text = 'Es necesario, antes de usar la herramienta, la lectura de datos y de intervalos de fechas'
@@ -112,17 +111,6 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
             description='Tipo de Gráfica:',
         )
 
-        '''titulo_carpeta_grafica = widgets.HTML(value=f"<b>CARPETA DESCARGA GRÁFICAS:</b>")
-    
-        aviso_carpeta_grafica = widgets.Label(value="Ejemplo:C:\\Users\\user\\Documents\\Archivos")
-    
-        carpeta2 = widgets.Text(
-            value='',
-            placeholder='Carpeta',
-            description='Carpeta:',
-            disabled=False
-        )'''
-
         ids = ['Todos']
 
         for id in diccionario_estudiantes.keys():
@@ -145,34 +133,13 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         b1 = widgets.VBox()
         box1 = []
 
-        '''text = "SELECCIÓN DE FECHAS"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")
-        box1.append(titulo)'''
         box1.append(titulo_fechas)
 
         box1.append(seleccion_fechas)
 
-        '''text = "SELECCIÓN DE TEMAS"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
         box1.append(titulo_temas)
 
-        '''temas = ["Todos"]
-        for k in diccionario_tema.keys():
-            temas.append(k)
-    
-        seleccion_temas = widgets.SelectMultiple(
-            options=temas,
-            value=['Todos'],
-            # rows=10,
-            description='Temas',
-            disabled=False
-        )'''
-
         box1.append(seleccion_temas)
-
-        '''text = "OPCIONES DE EJECUCIÓN"
-        titulo_b = widgets.HTML(value=f"<b>{text}</b>")'''
 
         opciones = widgets.RadioButtons(
             options=['Temas x Fecha', 'Fecha x Temas'],
@@ -186,32 +153,8 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         boton = Boton_proceso_temafecha(diccionario_tema, seleccion_temas, seleccion_fechas, fechas, opciones)
         box1.append(boton.button)
 
-        '''text = "NOMBRE DOCUMENTO PDF"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''pdf = widgets.Text(
-            value='',
-            placeholder='Documento',
-            description='Documento:',
-            disabled=False
-        )'''
-
         box1.append(titulo_documento)
         box1.append(pdf)
-
-        '''p = widgets.Label(value="AVISO: El fichero se guardará en la raíz de la carpeta.")'''
-
-        '''text = "CARPETA DESCARGA"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")
-    
-        p = widgets.Label(value="Ejemplo:C:\\Users\\user\\Documents\\Archivos")'''
-
-        '''carpeta = widgets.Text(
-            value='',
-            placeholder='Carpeta',
-            description='Carpeta:',
-            disabled=False
-        )'''
 
         box1.append(titulo_carpeta)
         box1.append(aviso)
@@ -229,26 +172,8 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         b2 = widgets.VBox()
         box2 = []
 
-        '''text = "SELECCIÓN DE FECHAS"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''fechas_s = ["Todos"]
-        for f in fechas:
-            fechas_s.append(str(f[0]).split(' ')[0] + " / " + str(f[1]).split(' ')[0])
-    
-        seleccion_fechas = widgets.SelectMultiple(
-            options=fechas_s,
-            value=['Todos'],
-            # rows=10,
-            description='Fechas',
-            disabled=False
-        )'''
-
         box2.append(titulo_fechas)
         box2.append(seleccion_fechas)
-
-        '''text = "OPCIONES DE RANKING"
-        titulo_b = widgets.HTML(value=f"<b>{text}</b>")'''
 
         opciones = widgets.RadioButtons(
             options=['Nota Media', 'Participacion', 'Aprobados', '% Aprobados'],
@@ -263,33 +188,10 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         boton = Boton_proceso_ranking(diccionario_tema, seleccion_fechas, fechas, opciones)
         box2.append(boton.button)
 
-        '''text = "NOMBRE DOCUMENTO PDF"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''pdf = widgets.Text(
-            value='',
-            placeholder='Documento',
-            description='Documento:',
-            disabled=False
-        )'''
-
         box2.append(titulo_documento)
         box2.append(pdf)
 
-        '''p = widgets.Label(value="AVISO: El fichero se guardará en la raíz de la carpeta.")'''
         box2.append(aviso)
-
-        '''text = "CARPETA DESCARGA"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")
-    
-        p = widgets.Label(value="Ejemplo:C:\\Users\\user\\Documents\\Archivos")'''
-
-        '''carpeta = widgets.Text(
-            value='',
-            placeholder='Carpeta',
-            description='Carpeta:',
-            disabled=False
-        )'''
 
         box2.append(titulo_carpeta)
         box2.append(aviso_carpeta)
@@ -303,46 +205,7 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         # -------------------------------------------------------------------------------
 
         b3 = widgets.VBox()
-        box3 = []
-
-        '''text = "SELECCIÓN DE FECHAS"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''fechas_s = ["Todos"]
-        for f in fechas:
-            fechas_s.append(str(f[0]).split(' ')[0] + " / " + str(f[1]).split(' ')[0])
-    
-        seleccion_fechas = widgets.SelectMultiple(
-            options=fechas_s,
-            value=['Todos'],
-            # rows=10,
-            description='Fechas',
-            disabled=False
-        )'''
-
-        box3.append(titulo_fechas)
-        box3.append(seleccion_fechas)
-
-        '''text = "SELECCIÓN DE TEMAS"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''temas = ["Todos"]
-        for k in diccionario_tema.keys():
-            temas.append(k)
-    
-        seleccion_temas = widgets.SelectMultiple(
-            options=temas,
-            value=['Todos'],
-            # rows=10,
-            description='Temas',
-            disabled=False
-        )'''
-
-        box3.append(titulo_temas)
-        box3.append(seleccion_temas)
-
-        '''text = "OPCIONES DE EJECUCIÓN"
-        titulo_b = widgets.HTML(value=f"<b>{text}</b>")'''
+        box3 = [titulo_fechas, seleccion_fechas, titulo_temas, seleccion_temas]
 
         opciones = widgets.RadioButtons(
             options=['Fecha x Temas', 'Temas x Fecha'],
@@ -353,9 +216,6 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
 
         box3.append(titulo_ejecucion)
         box3.append(opciones)
-
-        '''text = "OPCIONES DE GRÁFICA"
-        titulo_b = widgets.HTML(value=f"<b>{text}</b>")'''
 
         opciones2 = widgets.RadioButtons(
             options=['Nota Media', 'Participacion', 'Aprobados', '% Aprobados'],
@@ -370,17 +230,6 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         box3.append(diseno_grafica)
         box3.append(opcion_grafica)
 
-        '''text = "COLOR DE GRÁFICA"
-        titulo_b = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''p = widgets.Label(value="Escoge un color.")
-        color = widgets.ColorPicker(
-            concise=False,
-            description='Color',
-            value='blue',
-            disabled=False
-        )'''
-
         box3.append(titulo_color_grafica)
         box3.append(color_grafica)
         box3.append(color)
@@ -389,53 +238,15 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
                                opcion_grafica)
         box3.append(boton.button)
 
-        '''text = "NOMBRE DOCUMENTO PDF"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''pdf = widgets.Text(
-            value='',
-            placeholder='Documento',
-            description='Documento:',
-            disabled=False
-        )'''
-
         box3.append(titulo_documento)
         box3.append(pdf)
 
-
         box3.append(aviso)
-
-        '''text = "CARPETA DESCARGA PDF"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")
-        p = widgets.Label(value="Ejemplo:C:\\Users\\user\\Documents\\Archivos")'''
 
         box3.append(titulo_carpeta)
         box3.append(aviso_carpeta)
 
-        '''carpeta = widgets.Text(
-            value='',
-            placeholder='Carpeta',
-            description='Carpeta:',
-            disabled=False
-        )'''
-
         box3.append(carpeta)
-
-        '''text = "CARPETA DESCARGA GRÁFICAS"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")
-        p = widgets.Label(value="Ejemplo:C:\\Users\\user\\Documents\\Archivos")'''
-
-        '''box3.append(titulo_carpeta_grafica)
-        box3.append(aviso_carpeta_grafica)'''
-
-        '''carpeta2 = widgets.Text(
-            value='',
-            placeholder='Carpeta',
-            description='Carpeta:',
-            disabled=False
-        )'''
-
-        # box3.append(carpeta2)
 
         boton2 = Boton_graficas_pdf(diccionario_tema, seleccion_temas, seleccion_fechas, fechas, opciones, opciones2,
                                     color, pdf, carpeta, opcion_grafica)
@@ -446,64 +257,7 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         # -------------------------------------------------------------------------------
 
         b4 = widgets.VBox()
-        box4 = []
-
-        '''text = "SELECCIÓN DE FECHAS"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''fechas_s = ["Todos"]
-        for f in fechas:
-            fechas_s.append(str(f[0]).split(' ')[0] + " / " + str(f[1]).split(' ')[0])
-    
-        seleccion_fechas = widgets.SelectMultiple(
-            options=fechas_s,
-            value=['Todos'],
-            # rows=10,
-            description='Fechas',
-            disabled=False
-        )'''
-
-        box4.append(titulo_fechas)
-        box4.append(seleccion_fechas)
-
-        '''text = "SELECCIÓN DE TEMAS"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''temas = ["Todos"]
-        for k in diccionario_tema.keys():
-            temas.append(k)
-    
-        seleccion_temas = widgets.SelectMultiple(
-            options=temas,
-            value=['Todos'],
-            # rows=10,
-            description='Temas',
-            disabled=False
-        )'''
-
-        box4.append(titulo_temas)
-        box4.append(seleccion_temas)
-
-        '''text = "SELECCIÓN DE ESTUDIANTES:"
-        titulo_b = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''ids = ["Todos"]
-        for id in diccionario_estudiantes.keys():
-            ids.append(id)'''
-
-        '''estudiantes = widgets.SelectMultiple(
-            options=ids,
-            value=['Todos'],
-            # rows=10,
-            description='Estudiantes',
-            disabled=False
-        )'''
-
-        box4.append(titulo_estudiantes)
-        box4.append(estudiantes)
-
-        '''text = "OPCIONES DE EJECUCIÓN"
-        titulo_b = widgets.HTML(value=f"<b>{text}</b>")'''
+        box4 = [titulo_fechas, seleccion_fechas, titulo_temas, seleccion_temas, titulo_estudiantes, estudiantes]
 
         opciones = widgets.RadioButtons(
             options=['Temas x Fechas', 'Fechas x Temas'],
@@ -515,36 +269,14 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         box4.append(titulo_ejecucion)
         box4.append(opciones)
 
-        boton = Boton_estudiantes(diccionario_estudiantes, seleccion_temas, seleccion_fechas, fechas, opciones, estudiantes)
+        boton = Boton_estudiantes(diccionario_estudiantes, seleccion_temas, seleccion_fechas, fechas, opciones,
+                                  estudiantes)
         box4.append(boton.button)
-
-        '''text = "NOMBRE DOCUMENTO PDF"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''pdf = widgets.Text(
-            value='',
-            placeholder='Documento',
-            description='Documento:',
-            disabled=False
-        )'''
 
         box4.append(titulo_documento)
         box4.append(pdf)
 
-        '''p = widgets.Label(value="AVISO: El fichero se guardará en la raíz de la carpeta.")'''
         box4.append(aviso)
-
-        '''text = "CARPETA DESCARGA"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")
-    
-        p = widgets.Label(value="Ejemplo:C:\\Users\\user\\Documents\\Archivos")'''
-
-        '''carpeta = widgets.Text(
-            value='',
-            placeholder='Carpeta',
-            description='Carpeta:',
-            disabled=False
-        )'''
 
         box4.append(titulo_carpeta)
         box4.append(aviso_carpeta)
@@ -560,45 +292,11 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         b5 = widgets.VBox()
         box5 = []
 
-        '''text = "SELECCIÓN DE FECHAS"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''fechas_s = ["Todos"]
-        for f in fechas:
-            fechas_s.append(str(f[0]).split(' ')[0] + " / " + str(f[1]).split(' ')[0])
-    
-        seleccion_fechas = widgets.SelectMultiple(
-            options=fechas_s,
-            value=['Todos'],
-            # rows=10,
-            description='Fechas',
-            disabled=False
-        )'''
-
         box5.append(titulo_fechas)
         box5.append(seleccion_fechas)
 
-        '''text = "SELECCIÓN DE ESTUDIANTES:"
-        titulo_b = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''ids = ["Todos"]
-    
-        for id in diccionario_estudiantes.keys():
-            ids.append(id)'''
-
-        '''estudiantes = widgets.SelectMultiple(
-            options=ids,
-            value=['Todos'],
-            # rows=10,
-            description='Estudiantes',
-            disabled=False
-        )'''
-
         box5.append(titulo_estudiantes)
         box5.append(estudiantes)
-
-        '''text = "OPCIONES DE RANKING"
-        titulo_b = widgets.HTML(value=f"<b>{text}</b>")'''
 
         opciones = widgets.RadioButtons(
             options=['Nota Media', 'Participacion', 'Aprobados', '% Aprobados'],
@@ -613,39 +311,17 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         boton = Boton_ranking_estudiante(diccionario_estudiantes, seleccion_fechas, fechas, opciones, estudiantes)
         box5.append(boton.button)
 
-        '''text = "NOMBRE DOCUMENTO PDF"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''pdf = widgets.Text(
-            value='',
-            placeholder='Documento',
-            description='Documento:',
-            disabled=False
-        )'''
-
         box5.append(titulo_documento)
         box5.append(pdf)
 
-        '''p = widgets.Label(value="AVISO: El fichero se guardará en la raíz de la carpeta.")'''
         box5.append(aviso)
-
-        '''text = "CARPETA DESCARGA"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")
-    
-        p = widgets.Label(value="Ejemplo:C:\\Users\\user\\Documents\\Archivos")'''
-
-        '''carpeta = widgets.Text(
-            value='',
-            placeholder='Carpeta',
-            description='Carpeta:',
-            disabled=False
-        )'''
 
         box5.append(titulo_carpeta)
         box5.append(aviso_carpeta)
         box5.append(carpeta)
 
-        boton2 = Boton_ranking_estudiante_pdf(diccionario_estudiantes, seleccion_fechas, fechas, opciones, estudiantes, pdf,
+        boton2 = Boton_ranking_estudiante_pdf(diccionario_estudiantes, seleccion_fechas, fechas, opciones, estudiantes,
+                                              pdf,
                                               carpeta)
         box5.append(boton2.button)
 
@@ -654,47 +330,17 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         b6 = widgets.VBox()
         box6 = []
 
-        '''text = "SELECCIÓN DE TEMAS"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
         tms = []
 
         for k in diccionario_tema.keys():
             temas.append(k)
             tms.append(k)
 
-        '''
-        seleccion_temas = widgets.SelectMultiple(
-            options=temas,
-            value=['Todos'],
-            # rows=10,
-            description='Temas',
-            disabled=False
-        )'''
-
-        '''text = "SELECCIÓN DE FECHAS"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''fechas_s = ["Todos"]
-        for f in fechas:
-            fechas_s.append(str(f[0]).split(' ')[0] + " / " + str(f[1]).split(' ')[0])
-    
-        seleccion_fechas = widgets.SelectMultiple(
-            options=fechas_s,
-            value=['Todos'],
-            # rows=10,
-            description='Fechas',
-            disabled=False
-        )'''
-
         box6.append(titulo_fechas)
         box6.append(seleccion_fechas)
 
         box6.append(titulo_temas)
         box6.append(seleccion_temas)
-
-        '''text = "OPCIONES DE RANKING"
-        titulo_b = widgets.HTML(value=f"<b>{text}</b>")'''
 
         opciones = widgets.RadioButtons(
             options=['Nota Media', 'Participacion', 'Aprobados', '% Aprobados'],
@@ -706,41 +352,14 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         box6.append(titulo_ranking)
         box6.append(opciones)
 
-        '''ids = []
-    
-        for id in diccionario_estudiantes.keys():
-            ids.append(id)'''
-
-        boton = Boton_ranking_estudiantes(diccionario_estudiantes, seleccion_temas, tms, seleccion_fechas, fechas, opciones)
+        boton = Boton_ranking_estudiantes(diccionario_estudiantes, seleccion_temas, tms, seleccion_fechas, fechas,
+                                          opciones)
         box6.append(boton.button)
-
-        '''text = "NOMBRE DOCUMENTO PDF"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''pdf = widgets.Text(
-            value='',
-            placeholder='Documento',
-            description='Documento:',
-            disabled=False
-        )'''
 
         box6.append(titulo_documento)
         box6.append(pdf)
 
-        '''p = widgets.Label(value="AVISO: El fichero se guardará en la raíz de la carpeta.")'''
         box6.append(aviso)
-
-        '''text = "CARPETA DESCARGA"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")
-    
-        p = widgets.Label(value="Ejemplo:C:\\Users\\user\\Documents\\Archivos")'''
-
-        '''carpeta = widgets.Text(
-            value='',
-            placeholder='Carpeta',
-            description='Carpeta:',
-            disabled=False
-        )'''
 
         box6.append(titulo_carpeta)
         box6.append(aviso_carpeta)
@@ -756,63 +375,14 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         b7 = widgets.VBox()
         box7 = []
 
-        '''text = "SELECCIÓN DE FECHAS"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''fechas_s = ["Todos"]
-        for f in fechas:
-            fechas_s.append(str(f[0]).split(' ')[0] + " / " + str(f[1]).split(' ')[0])
-    
-        seleccion_fechas = widgets.SelectMultiple(
-            options=fechas_s,
-            value=['Todos'],
-            # rows=10,
-            description='Fechas',
-            disabled=False
-        )'''
-
         box7.append(titulo_fechas)
         box7.append(seleccion_fechas)
-
-        '''text = "SELECCIÓN DE TEMAS"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''temas = ["Todos"]
-        for k in diccionario_tema.keys():
-            temas.append(k)
-    
-        seleccion_temas = widgets.SelectMultiple(
-            options=temas,
-            value=['Todos'],
-            # rows=10,
-            description='Temas',
-            disabled=False
-        )'''
 
         box7.append(titulo_temas)
         box7.append(seleccion_temas)
 
-        '''text = "SELECCIÓN DE ESTUDIANTES:"
-        titulo_b = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''ids = ["Todos"]
-    
-        for id in diccionario_estudiantes.keys():
-            ids.append(id)'''
-
-        '''estudiantes = widgets.SelectMultiple(
-            options=ids,
-            value=['Todos'],
-            # rows=10,
-            description='Estudiantes',
-            disabled=False
-        )'''
-
         box7.append(titulo_estudiantes)
         box7.append(estudiantes)
-
-        '''text = "OPCIONES DE EJECUCIÓN"
-        titulo_b = widgets.HTML(value=f"<b>{text}</b>")'''
 
         opciones = widgets.RadioButtons(
             options=['Fecha x Temas', 'Temas x Fecha'],
@@ -823,9 +393,6 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
 
         box7.append(titulo_ejecucion)
         box7.append(opciones)
-
-        '''text = "OPCIONES DE GRÁFICA"
-        titulo_b = widgets.HTML(value=f"<b>{text}</b>")'''
 
         opciones2 = widgets.RadioButtons(
             options=['Nota Media', 'Participacion', 'Aprobados', '% Aprobados'],
@@ -840,16 +407,6 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         box7.append(diseno_grafica)
         box7.append(opcion_grafica)
 
-        '''text = "COLOR DE GRÁFICA"
-        titulo_b = widgets.HTML(value=f"<b>{text}</b>")
-        p = widgets.Label(value="Escoge un color.")
-        color = widgets.ColorPicker(
-            concise=False,
-            description='Color',
-            value='blue',
-            disabled=False
-        )'''
-
         box7.append(titulo_color_grafica)
         box7.append(color_grafica)
         box7.append(color)
@@ -858,54 +415,18 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
                                          estudiantes, opciones2, color, opcion_grafica)
         box7.append(boton.button)
 
-        '''text = "NOMBRE DOCUMENTO PDF"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")'''
-
-        '''pdf = widgets.Text(
-            value='',
-            placeholder='Documento',
-            description='Documento:',
-            disabled=False
-        )'''
-
         box7.append(titulo_documento)
         box7.append(pdf)
 
         box7.append(aviso)
 
-        '''text = "CARPETA DESCARGA"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")
-        p = widgets.Label(value="Ejemplo:C:\\Users\\user\\Documents\\Archivos")'''
-
         box7.append(titulo_carpeta)
         box7.append(aviso_carpeta)
 
-        '''carpeta = widgets.Text(
-            value='',
-            placeholder='Carpeta',
-            description='Carpeta:',
-            disabled=False
-        )'''
-
         box7.append(carpeta)
 
-        '''text = "CARPETA DESCARGA GRÁFICAS"
-        titulo = widgets.HTML(value=f"<b>{text}</b>")
-        p = widgets.Label(value="Ejemplo:C:\\Users\\user\\Documents\\Archivos")'''
-
-        '''box7.append(titulo_carpeta_grafica)
-        box7.append(aviso_carpeta_grafica)'''
-
-        '''carpeta2 = widgets.Text(
-            value='',
-            placeholder='Carpeta',
-            description='Carpeta:',
-            disabled=False
-        )'''
-
-        # box7.append(carpeta2)
-
-        boton2 = Boton_grafica_estudiante_pdf(diccionario_estudiantes, seleccion_temas, seleccion_fechas, fechas, opciones,
+        boton2 = Boton_grafica_estudiante_pdf(diccionario_estudiantes, seleccion_temas, seleccion_fechas, fechas,
+                                              opciones,
                                               estudiantes, opciones2, color, pdf, carpeta, opcion_grafica)
         box7.append(boton2.button)
 
@@ -977,11 +498,6 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
 
         box8.append(carpeta)
 
-        '''box8.append(titulo_carpeta_grafica)
-        box8.append(aviso_carpeta_grafica)
-    
-        box8.append(carpeta2)'''
-
         boton2 = Boton_grafica_registros_pdf(identificador, seleccion_fechas, fechas, estudiantes, color, pdf, carpeta,
                                              IP, opcion_grafica, diccionario_estudiantes)
 
@@ -1044,11 +560,6 @@ def configuracion(diccionario_tema, diccionario_estudiantes, documentos, fechas)
         box9.append(aviso_carpeta)
 
         box9.append(carpeta)
-
-        '''box9.append(titulo_carpeta_grafica)
-        box9.append(aviso_carpeta_grafica)
-    
-        box9.append(carpeta2)'''
 
         boton2 = Boton_graficas_comparacion_PDF(seleccion_fechas, fechas, opciones2, opcion_grafica,
                                                 seleccion_comparacion, documentos, pdf, carpeta)

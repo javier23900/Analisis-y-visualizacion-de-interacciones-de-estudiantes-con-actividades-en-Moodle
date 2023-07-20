@@ -14,10 +14,7 @@ opción de selección de los ficheros con la información de los test realizados
         diccionario es la fecha en la que se realizó el test y para cada clave su valor es un array que contiene un conjunto 
         de arrays con los test de cada tema realizados por los estudiantes en dicha fecha.
         
-        - diccionario_estudiantes: Diccionario con los estudiantes y sus test realizados. La clave del 
-        diccionario es el identificador del estudiante y para cada clave su valor es un diccionario con los test. Este segundo 
-        diccionario tiene como clave el tema al que pertenecen los test y para cada clave su valor es un array que contiene 
-        los test realizados por los estudiantes.
+        - diccionario_estudiantes: Diccionario con los estudiantes y sus test realizados.
 '''
 
 
@@ -50,7 +47,6 @@ def cargar_ficheros(diccionario_tema, diccionario_fecha, diccionario_estudiantes
 
     uploader = widgets.FileUpload()
 
-    # elegir_tema(tema, uploader)
     p = widgets.Label(value="Introduce el tema al que se corresponde el fichero: ")
     display(p)
     display(tema)

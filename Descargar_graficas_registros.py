@@ -13,9 +13,6 @@ con las gráficas del número de registros de acceso a Moodle a un recurso indic
 
     - Argumentos:
         - identificador: Identidicador del recurso de Moodle.
-        - diccionario: Diccionario con los estudiantes y sus registros de acceso a Moodle. La clave del diccionario 
-        es el identificador del estudiante. Para cada clave su valor es un array con objetos de tipo 'Registro' que 
-        contienen los accesos a Moodle del estudiante.
         - s_fechas: Intervalos de fechas seleccionados para los cuales se quiere obtener los resultados. 
         - fechas: Array con los intervalos de fechas.
         - estudiantes: Estudiantes seleccionados para los que se desea obtener la información.
@@ -23,9 +20,10 @@ con las gráficas del número de registros de acceso a Moodle a un recurso indic
         - documento: Objeto que representa el documento a descargar.
         - nombre_documento: Nombre del documento a descargar.
         - carpeta: Carpeta destino para el documento a descargar
-        - carpeta2: Carpeta destino para la gráfica a descargar
         - IP: Dirección IP desde la cual se ha accedido a Moodle.
         - diseno: Opción para el diseño de la gráfica
+        - diccionario_estudiantes: Diccionario con los estudiantes y sus registros de acceso. La clave del diccionario 
+        es el identificador del estudiante y para cada clave su valor es un array de objetos de tipo Registros.
 '''
 
 
@@ -212,7 +210,6 @@ def Grafica_registros_pdf(identificador, s_fechas, fechas, estudiantes, color, d
 
             cursor += 250
             documento.drawImage(nombre_fichero, 50, h - int(cursor))
-            # shutil.move(nombre_fichero, carpeta2)
             os.remove(nombre_fichero)
 
             documento.showPage()

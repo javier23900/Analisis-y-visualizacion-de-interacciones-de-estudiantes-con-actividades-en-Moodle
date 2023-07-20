@@ -3,11 +3,11 @@ CLASE PRUEBA
 
 Recoge la información de cada uno de los test realizados por el alumno:
 
-  - Identificador: Identificador del alumno.
-  - Tema: Tema al que corresponde el test realizado.
-  - Estado: Estado del test (finalizado o pendiente)
-  - Fecha: Fecha en la que se realizó el test.
-  - Calificación total: Nota obtenida por el alumno en el test.
+  - identificador: Identificador del alumno.
+  - tema: Tema al que corresponde el test realizado.
+  - estado: Estado del test (finalizado o pendiente)
+  - fecha: Fecha en la que se realizó el test.
+  - calificación total: Nota obtenida por el alumno en el test.
   """
 
 
@@ -26,8 +26,9 @@ CLASE ESTUDIANTE
 
 Recoge la información de cada uno de los alumnos:
 
-  - Identificador: Identificador del alumno.
-  - Pruebas: Diccionario que recoge las pruebas realizadas por el estudiante.
+  - identificador: Identificador del alumno.
+  - pruebas: Diccionario que recoge las pruebas realizadas por el estudiante.
+  - registros: Lists que recoge los registros de acceso del estudiante.
 '''
 
 

@@ -9,8 +9,8 @@ from Analizar_Datos_test import *
 from Lectura_Ficheros import leer
 
 '''
-def Grafica_test_fecha(diccionario, temas, s_fechas, fechas, opcion, color): La función muestra para una serie de 
-intervalos de tiempo una gráfica comparando un determinado valor (nota media, test finalizados, test aprobados o 
+def Grafica_test_fecha(diccionario, temas, s_fechas, fechas, opcion, color, diseno): La función muestra para una serie 
+de intervalos de tiempo una gráfica comparando un determinado valor (nota media, test finalizados, test aprobados o 
 porcentaje de aprobados) para varios temas.
 
   - Argumentos:
@@ -158,8 +158,8 @@ def Grafica_test_fecha(diccionario, temas, s_fechas, fechas, opcion, color, dise
 
 
 '''
-def Grafica_fecha_test(diccionario, temas, s_fechas, fechas, opcion, color): La función muestra para una serie de temas 
-una grafica comparando un determinado valor (nota media, test finalizados, test aprobados o porcentaje de aprobados) 
+def Grafica_fecha_test(diccionario, temas, s_fechas, fechas, opcion, color, diseno): La función muestra para una serie 
+de temas una grafica comparando un determinado valor (nota media, test finalizados, test aprobados o porcentaje de aprobados) 
 para varios intervalos de tiempo.
 
   - Argumentos:
@@ -283,8 +283,8 @@ def Grafica_fecha_test(diccionario, temas, s_fechas, fechas, opcion, color, dise
 
 
 '''
-def Grafica_estudiante(identificador, estudiantes, temas, s_fechas, fechas, opcion, opcion2, color): La función muestra 
-para cada uno de los estudiantes una gráfica comparando un determinado valor (nota media, test finalizados, 
+def Grafica_estudiante(identificador, estudiantes, temas, s_fechas, fechas, opcion, opcion2, color, diseno): La función 
+muestra para cada uno de los estudiantes una gráfica comparando un determinado valor (nota media, test finalizados, 
 test aprobados o porcentaje de aprobados) para varios temas (el valor se puede comparar para un mismo tema para varios 
 interalos de tiempo o para varios temas en un intervalo de tiempo)
   - Argumentos:
@@ -512,8 +512,9 @@ La función muestra para una serie de intervalos de tiempo una gráfica comparan
       - fechas: Array con los intervalos de fechas.
       - opcion: Opción para el valor que se desea mostrar en las gráficas.
       - color: Color deseado para las barras de la gráfica.
-      - diseno: opción para el diseño de la gráfica
-      - ficheros: ficheros que se desea comparar
+      - diseno: opción para el diseño de la gráfica.
+      - ficheros: ficheros que se desea comparar.
+      - documentos: Array con los documentos incorporados a la herramienta.
 '''
 
 

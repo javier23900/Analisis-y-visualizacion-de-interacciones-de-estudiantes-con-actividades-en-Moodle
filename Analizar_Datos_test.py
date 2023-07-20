@@ -2,7 +2,7 @@ from datetime import datetime
 
 '''def nota_media(pruebas): Función encargada de calcular la nota media para un conjunto de pruebas.
   - Argumentos:
-      - pruebas: array con todas las pruebas realizadas para un determinado test.
+      - pruebas: array con todas las pruebas realizadas para un determinado tema.
   - Resultado: Devuelve la nota media para un conjunto de pruebas (nota media de los resultados obtenidos)
 '''
 
@@ -254,8 +254,8 @@ def ranking_test(diccionario, s_fechas, fechas, opcion):
 
 
 '''
-Resultados_estudiante(identificador, estudiantes, temas, s_fechas, fechas, opcion): Función encargada de analizar los test 
-realizados por un estudiante.
+Resultados_estudiante(identificador, estudiantes, temas, s_fechas, fechas, opcion): Función encargada de analizar los 
+test realizados por un estudiante.
   - Argumentos:
       - identificador: Identificador del estudiante.
       - estudiantes: Diccionario con los estudiantes y sus test realizados. La clave del diccionario es el identificador 
@@ -405,7 +405,7 @@ def ranking_test_estudiante(identificador, estudiantes, s_fechas, fechas, opcion
         print("-----------------------------------------------------------------------------")
         print("PORCENTAJE DE APROBADOS")
 
-    for e in estudiantes:
+    for e in identificador:
 
         print("-----------------------------------------------------------------------------")
         print("ESTUDIANTE: " + e)
